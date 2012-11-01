@@ -2,3 +2,8 @@
 
 node_modules/
 .bem/cache
+
+common.bundles/*/*
+!common.bundles/i-modernizr/i-modernizr.js
+
+!level.js
