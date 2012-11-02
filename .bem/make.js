@@ -47,7 +47,7 @@ MAKE.decl('Convert', 'Node', {
             prj = BEM.createLevel(this.root);
 
         Q.all(['blocks', 'bundles'].map(function(tech) {
-                return prj.getTech(tech).createByDecl({ block: COMMON_LEVEL }, prj, { force: false });
+                return prj.getTech(tech).createByDecl({ block : COMMON_LEVEL }, prj, { force : false });
             }))
             .fin(function() {
                 _this.proccess(prj, block);
@@ -63,7 +63,7 @@ MAKE.decl('Convert', 'Node', {
             index = 'modernizr.js',
             lib = 'feature-detects',
 
-            level = BEM.createLevel(prj.getRelPathByObj({ block: COMMON_LEVEL }, 'blocks')),
+            level = BEM.createLevel(prj.getRelPathByObj({ block : COMMON_LEVEL }, 'blocks')),
 
             jsTech = level.getTech('js'),
             depsTech = level.getTech('deps.js');
@@ -110,10 +110,10 @@ MAKE.decl('Convert', 'Node', {
             return Q.step(
                 function() {
 
-                    var decl = BEM.createLevel(prj.getRelPathByObj({ block: COMMON_LEVEL }, 'blocks'))
+                    var decl = BEM.createLevel(prj.getRelPathByObj({ block : COMMON_LEVEL }, 'blocks'))
                             .getItemsByIntrospection()
                             .map(function(item) {
-                                return { block: item.block, elem: item.elem };
+                                return { block : item.block, elem : item.elem };
                             });
 
                     return decl;
@@ -122,8 +122,8 @@ MAKE.decl('Convert', 'Node', {
 
                 function(decl) {
 
-                    var bundles = BEM.createLevel(prj.getRelPathByObj({ block: COMMON_LEVEL }, 'bundles')),
-                        prefix = bundles.getByObj({ block: name }),
+                    var bundles = BEM.createLevel(prj.getRelPathByObj({ block : COMMON_LEVEL }, 'bundles')),
+                        prefix = bundles.getByObj({ block : name }),
                         tech = bundles.getTech('bemdecl.js');
 
                     return tech.storeCreateResults(prefix,
