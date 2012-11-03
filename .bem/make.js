@@ -63,16 +63,16 @@ MAKE.decl('Convert', 'Node', {
             index = 'modernizr.js',
             lib = 'feature-detects',
 
-            level = BEM.createLevel(prj.getRelPathByObj({ block : COMMON_LEVEL }, 'blocks')),
+            blocks = BEM.createLevel(prj.getRelPathByObj({ block : COMMON_LEVEL }, 'blocks')),
 
-            jsTech = level.getTech('js'),
-            depsTech = level.getTech('deps.js');
+            jsTech = blocks.getTech('js'),
+            depsTech = blocks.getTech('deps.js');
 
         Q.all([
             (function() {
 
                 return U.readFile(PATH.resolve(this.root, prefix, index)).then(function(data) {
-                    var prefix = level.getByObj({ block : name });
+                    var prefix = blocks.getByObj({ block : name });
 
                     jsTech.storeCreateResults(prefix, { js : data }, true);
                 });
@@ -90,15 +90,15 @@ MAKE.decl('Convert', 'Node', {
                     .forEach(function(f) {
 
                         U.readFile(PATH.join(libPath, f)).then(function(data) {
-                            var prefix = level.getByObj({ block : name, elem : PATH.basename(f, '.js') });
+                            var prefix = blocks.getByObj({ block : name, elem : PATH.basename(f, '.js') });
 
-                            return Q.all(
-                                jsTech.storeCreateResults(prefix,
-                                        { 'js' : data }, true),
-                                depsTech.storeCreateResults(prefix,
-                                        { 'deps.js' :
-                                            ('(' + JSON.stringify({ mustDeps : name }, null, 4) + ');\n') }, true)
-                                );
+                            return Q.all([
+                                    jsTech.storeCreateResults(prefix,
+                                            { 'js' : data }, true),
+                                    depsTech.storeCreateResults(prefix,
+                                            { 'deps.js' :
+                                                ('(' + JSON.stringify({ mustDeps : name }, null, 4) + ');\n') }, true)
+                                ]);
                         });
 
                     });
@@ -110,8 +110,7 @@ MAKE.decl('Convert', 'Node', {
             return Q.step(
                 function() {
 
-                    var decl = BEM.createLevel(prj.getRelPathByObj({ block : COMMON_LEVEL }, 'blocks'))
-                            .getItemsByIntrospection()
+                    var decl = blocks.getItemsByIntrospection()
                             .map(function(item) {
                                 return { block : item.block, elem : item.elem };
                             });
