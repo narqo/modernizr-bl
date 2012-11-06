@@ -30,7 +30,7 @@ them as dependencies in our project's blocks level.
 › tree prj/
 
 prj/
-  ├ i-modernizr/
+  ├ modernizr-bl/
   |   ├ common.blocks/
   |   |   ├ i-modernizr/
   |   |   |   ├ __webgl/
@@ -58,18 +58,18 @@ prj/
 })
 ```
 
-To create your bundle you should use `i-modernizr/common.blocks` and `blocks`
+To create your bundle you should use `modernizr-bl/common.blocks` and `blocks`
 levels while building:
 
 ```shell
 › bem build -T js \
-  -l i-modernizr/common.blocks \
+  -l modernizr-bl/common.blocks \
   -l blocks ...
 ```
 
 `i-modernizr/common.bundles` is prebuiled bundle, that includes all the library
 parts as single block file, so you could use it if you are happy with this.
 
-*Note*: you should use `i-modernizr/common.bundles` level **insted of**
+*Note*: you should use `modernizr-bl/common.bundles` level **insted of**
 `common.blocks` for this.
 
