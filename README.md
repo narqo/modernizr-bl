@@ -1,5 +1,5 @@
-i-modernizr
-===========
+modernizr-bl
+============
 
 *NOTE: This project is in the early development state*
 
